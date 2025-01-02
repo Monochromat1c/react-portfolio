@@ -1,9 +1,13 @@
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
 import { SiHtml5, SiCss3, SiPhp, SiLaravel, SiJavascript, SiBootstrap, SiGithub, SiMysql, SiReact, SiSass } from 'react-icons/si';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { FaMapMarkerAlt, FaGraduationCap, FaQuoteLeft } from 'react-icons/fa';
+import emailjs from '@emailjs/browser';
+import SuccessModal from '../components/SuccessModal';
 
 const Home = () => {
   const skills = [
@@ -54,6 +58,14 @@ const Home = () => {
       }
     ]
   };
+
+  const form = useRef();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  useEffect(() => {
+    emailjs.init("mHp4qqfnE2O6WAp5x");
+  }, []);
 
   return (
     <div className="w-full">
@@ -156,10 +168,25 @@ const Home = () => {
               <p className="text-gray-600 mb-4 text-center max-w-2xl mx-auto">
                 I am a fourth-year BSIT student at Filamer Christian University,
                 passionate about creating elegant and functional web solutions.
+                My journey in web development has equipped me with both
+                technical skills and creative problem-solving abilities.
               </p>
-              <div className="text-gray-600 text-center">
-                <p>📍 Cogon, Panay, Capiz, 5801, Philippines</p>
-                <p>🎓 BSIT - Filamer Christian University</p>
+              <div className="relative pl-4 mb-6">
+                <FaQuoteLeft className="absolute left-0 top-0 text-[#c66690] text-xl" />
+                <p className="text-gray-600 italic pl-6">
+                  "Aspiring to create meaningful digital experiences through
+                  innovative web development."
+                </p>
+              </div>
+              <div className="text-gray-600 space-y-2">
+                <div className="flex items-center justify-center gap-2">
+                  <FaMapMarkerAlt className="text-[#c66690]" />
+                  <p>Cogon, Panay, Capiz, 5801, Philippines</p>
+                </div>
+                <div className="flex items-center justify-center gap-2">
+                  <FaGraduationCap className="text-[#c66690]" />
+                  <p>BSIT - Filamer Christian University</p>
+                </div>
               </div>
             </div>
           </div>
@@ -247,10 +274,7 @@ const Home = () => {
               <div className="space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="w-10 h-10 bg-[#00dac4]/10 rounded-full flex items-center justify-center text-[#00dac4]">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
+                    <FaMapMarkerAlt className="w-5 h-5" />
                   </div>
                   <div>
                     <p className="font-medium text-[#2a2943]">Location</p>
@@ -265,7 +289,7 @@ const Home = () => {
                   </div>
                   <div>
                     <p className="font-medium text-[#2a2943]">Email</p>
-                    <p className="text-gray-600">charlesdiestro@gmail.com</p>
+                    <p className="text-gray-600">charlesdiestro6@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -286,44 +310,90 @@ const Home = () => {
                 </div>
               </div>
             </div>
+
             <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-6">
               <h3 className="text-xl font-semibold mb-6 text-[#2a2943]">Send a Message</h3>
-              <form className="space-y-4">
+              <form 
+                ref={form}
+                onSubmit={async (e) => {
+                  e.preventDefault();
+                  if (isLoading) return;
+                  
+                  setIsLoading(true);
+                  try {
+                    await emailjs.sendForm(
+                      'service_nwxn3gh',
+                      'template_dzclo3l',
+                      form.current,
+                      'mHp4qqfnE2O6WAp5x'
+                    );
+                    form.current.reset();
+                    setShowModal(true);
+                  } catch (error) {
+                    console.error('Error:', error);
+                    alert('Failed to send message. Please try again later.');
+                  } finally {
+                    setIsLoading(false);
+                  }
+                }}
+                className="space-y-4"
+              >
                 <div>
                   <label className="block text-[#2a2943] mb-2">Name</label>
                   <input
                     type="text"
+                    name="user_name"
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
                     placeholder="Your name"
+                    required
                   />
                 </div>
                 <div>
                   <label className="block text-[#2a2943] mb-2">Email</label>
                   <input
                     type="email"
+                    name="user_email"
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
                     placeholder="Your email"
+                    required
                   />
                 </div>
                 <div>
                   <label className="block text-[#2a2943] mb-2">Message</label>
                   <textarea
+                    name="message"
                     className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
                     rows="4"
                     placeholder="Your message"
+                    required
                   ></textarea>
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                  disabled={isLoading}
+                  className={`w-full bg-[#00dac4] hover:bg-[#00c4b0] text-white font-medium py-2 px-4 rounded-md transition-all relative ${
+                    isLoading ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
                 >
-                  Send Message
+                  {isLoading ? (
+                    <>
+                      <span className="opacity-0">Send Message</span>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                      </div>
+                    </>
+                  ) : (
+                    'Send Message'
+                  )}
                 </button>
               </form>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <SuccessModal isOpen={showModal} onClose={() => setShowModal(false)} />
 
       {/* Footer */}
       <footer className="bg-[#2a2943] text-white py-8">

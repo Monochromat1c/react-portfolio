@@ -20,6 +20,7 @@ export default {
       animation: {
         blob: "blob 7s infinite",
         float: "float 6s ease-in-out infinite",
+        'modal-in': 'modal-in 0.3s ease-out',
       },
       keyframes: {
         blob: {
@@ -42,6 +43,16 @@ export default {
           },
           "50%": {
             transform: "translateY(-20px)",
+          },
+        },
+        'modal-in': {
+          '0%': {
+            opacity: '0',
+            transform: 'scale(0.95)',
+          },
+          '100%': {
+            opacity: '1',
+            transform: 'scale(1)',
           },
         },
       },
