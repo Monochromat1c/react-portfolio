@@ -122,9 +122,9 @@ const Home = () => {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="animate-bounce">
           <svg 
-            className="w-8 h-8 text-[#00dac4]"
+            className="w-8 h-8 text-[#00dac4] mx-auto bottom-16 relative"
             fill="none" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
