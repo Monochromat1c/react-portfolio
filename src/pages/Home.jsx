@@ -217,7 +217,7 @@ const Home = () => {
                     <p className="font-medium text-[#2a2943]">GitHub</p>
                     <a 
                       href="https://github.com/Monochromat1c"
-                      className="text-[#00dac4] hover:text-[#00dac4]/80"
+                      className="text-[#2f7971] hover:text-[#00dac4]/80"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
