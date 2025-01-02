@@ -1,0 +1,279 @@
+import { Link } from 'react-router-dom';
+import { FaGithub } from 'react-icons/fa';
+import { SiHtml5, SiCss3, SiPhp, SiLaravel, SiJavascript, SiBootstrap, SiGithub, SiMysql } from 'react-icons/si';
+
+const Home = () => {
+  const skills = [
+    { name: 'HTML', icon: <SiHtml5 className="text-4xl text-[#c66690]" />, progress: 85 },
+    { name: 'CSS', icon: <SiCss3 className="text-4xl text-[#56b4ed]" />, progress: 80 },
+    { name: 'PHP', icon: <SiPhp className="text-4xl text-[#c66690]" />, progress: 75 },
+    { name: 'Laravel', icon: <SiLaravel className="text-4xl text-[#c66690]" />, progress: 70 },
+    { name: 'JavaScript', icon: <SiJavascript className="text-4xl text-[#00dac4]" />, progress: 65 },
+    { name: 'Bootstrap', icon: <SiBootstrap className="text-4xl text-[#56b4ed]" />, progress: 80 },
+    { name: 'GitHub', icon: <SiGithub className="text-4xl text-[#2a2943]" />, progress: 75 },
+    { name: 'MySQL', icon: <SiMysql className="text-4xl text-[#56b4ed]" />, progress: 75 },
+  ];
+
+  return (
+    <div className="w-full">
+      {/* Hero Section */}
+      <section className="relative min-h-screen bg-[#2a2943] overflow-hidden">
+        {/* Background image with overlay */}
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1517134191118-9d595e4c8c2b?q=80&w=2070" 
+            alt="Background" 
+            className="w-full h-full object-cover opacity-100"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#2a2943] via-[#2a2943]/95 to-[#2a2943]"></div>
+        </div>
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#00dac4]/20 rounded-full filter blur-xl animate-blob"></div>
+          <div className="absolute top-40 right-10 w-72 h-72 bg-[#c66690]/20 rounded-full filter blur-xl animate-blob [animation-delay:2s]"></div>
+          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-[#56b4ed]/20 rounded-full filter blur-xl animate-blob [animation-delay:4s]"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-[#2a2943]/10">
+          <h1 className="text-4xl sm:text-7xl font-bold text-white mb-6 drop-shadow-lg">
+            Charles Manuel Diestro
+          </h1>
+          <p className="text-2xl text-[#00dac4] font-medium mb-8 drop-shadow-lg">
+            Web Developer & BSIT Student
+          </p>
+          <p className="text-lg text-white mb-12 max-w-2xl leading-relaxed drop-shadow-md">
+            Passionate about creating elegant and functional web solutions.
+            Currently focused on full-stack development with expertise in modern
+            web technologies and frameworks.
+          </p>
+          <div className="flex gap-6">
+            <a
+              href="https://github.com/Monochromat1c"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-[#00dac4] hover:bg-[#00dac4]/90 text-[#2a2943] font-medium px-8 py-4 rounded-md flex items-center gap-2 transition-colors shadow-lg"
+            >
+              <FaGithub size={24} />
+              GitHub
+            </a>
+            <a
+              href="#contact"
+              className="border-2 border-[#00dac4] text-[#00dac4] hover:bg-[#00dac4] hover:text-[#2a2943] font-medium px-8 py-4 rounded-md transition-colors shadow-lg"
+            >
+              Contact
+            </a>
+          </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <svg 
+            className="w-8 h-8 text-[#00dac4]"
+            fill="none" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+            strokeWidth="2" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+          >
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="about" className="py-20 bg-slate-100">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12 text-[#2a2943]">About Me</h2>
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
+                <img
+                  src="/images/self-portrait/self.jpg"
+                  alt="Charles Manuel Diestro"
+                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-[#00dac4]"
+                />
+                <h3 className="text-xl font-semibold mb-2 text-[#2a2943]">Charles Manuel Diestro</h3>
+                <p className="text-[#c66690] font-medium mb-4">Web Developer</p>
+                <p className="text-gray-600 mb-4">
+                  I am a fourth-year BSIT student at Filamer Christian University,
+                  passionate about creating elegant and functional web solutions.
+                </p>
+                <div className="text-gray-600">
+                  <p>📍 Cogon, Panay, Capiz, 5801, Philippines</p>
+                  <p>🎓 BSIT - Filamer Christian University</p>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-2xl font-semibold mb-6 text-[#2a2943]">Technical Skills</h3>
+              <div className="grid grid-cols-2 gap-4">
+                {skills.map((skill, index) => (
+                  <div key={index} className="bg-white p-4 rounded-lg shadow-lg border border-gray-100">
+                    <div className="flex items-center gap-4 mb-2">
+                      {skill.icon}
+                      <span className="font-medium text-[#2a2943]">{skill.name}</span>
+                    </div>
+                    <div className="w-full bg-gray-100 rounded-full h-2">
+                      <div
+                        className="bg-[#00dac4] h-2 rounded-full"
+                        style={{ width: `${skill.progress}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Projects Section */}
+      <section id="projects" className="py-20 bg-[#2a2943]">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-4 text-white">Projects</h2>
+          <p className="text-center text-[#00dac4] mb-12">
+            Showcasing my latest web development work
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-lg shadow-xl overflow-hidden">
+              <img
+                src="/images/stepstyle-project/homepage.png"
+                alt="StepStyle Project"
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-[#2a2943]">StepStyle</h3>
+                <p className="text-gray-600 mb-4">
+                  A modern and responsive landing page for a shoe store,
+                  featuring a clean design and smooth user experience.
+                </p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  <span className="px-3 py-1 bg-[#00dac4]/10 text-[#00dac4] rounded-full text-sm">HTML</span>
+                  <span className="px-3 py-1 bg-[#56b4ed]/10 text-[#56b4ed] rounded-full text-sm">CSS</span>
+                  <span className="px-3 py-1 bg-[#c66690]/10 text-[#c66690] rounded-full text-sm">JavaScript</span>
+                </div>
+                <a
+                  href="#"
+                  className="text-[#00dac4] hover:text-[#00dac4]/80 font-medium flex items-center gap-2"
+                >
+                  View Project
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg shadow-xl p-6 flex flex-col items-center justify-center text-center">
+              <div className="text-5xl text-[#00dac4] mb-4">+</div>
+              <h3 className="text-xl font-bold mb-2 text-[#2a2943]">More Projects Coming Soon</h3>
+              <p className="text-gray-600">Stay tuned for future developments</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-slate-100">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-4 text-[#2a2943]">Contact Me</h2>
+          <p className="text-center text-gray-600 mb-12">
+            Feel free to reach out to me for any inquiries or collaboration opportunities.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-6">
+              <h3 className="text-xl font-semibold mb-6 text-[#2a2943]">Contact Information</h3>
+              <div className="space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-[#00dac4]/10 rounded-full flex items-center justify-center text-[#00dac4]">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-medium text-[#2a2943]">Location</p>
+                    <p className="text-gray-600">Cogon, Panay, Capiz, 5801, Philippines</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-[#56b4ed]/10 rounded-full flex items-center justify-center text-[#56b4ed]">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-medium text-[#2a2943]">Email</p>
+                    <p className="text-gray-600">charlesdiestro@gmail.com</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 bg-[#c66690]/10 rounded-full flex items-center justify-center text-[#c66690]">
+                    <FaGithub className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="font-medium text-[#2a2943]">GitHub</p>
+                    <a 
+                      href="https://github.com/Monochromat1c"
+                      className="text-[#00dac4] hover:text-[#00dac4]/80"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      @Monochromat1c
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-6">
+              <h3 className="text-xl font-semibold mb-6 text-[#2a2943]">Send a Message</h3>
+              <form className="space-y-4">
+                <div>
+                  <label className="block text-[#2a2943] mb-2">Name</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[#2a2943] mb-2">Email</label>
+                  <input
+                    type="email"
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
+                    placeholder="Your email"
+                  />
+                </div>
+                <div>
+                  <label className="block text-[#2a2943] mb-2">Message</label>
+                  <textarea
+                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
+                    rows="4"
+                    placeholder="Your message"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md transition-colors"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#2a2943] text-white py-8">
+        <div className="max-w-6xl mx-auto px-4 text-center">
+          <p>© 2024 Charles Manuel Diestro. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default Home; 
