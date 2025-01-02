@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FaMapMarkerAlt, FaGraduationCap, FaQuoteLeft } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
 import SuccessModal from '../components/SuccessModal';
+import Footer from '../components/Footer';
 
 const Home = () => {
   const skills = [
@@ -242,7 +243,7 @@ const Home = () => {
                   <span className="px-3 py-1 bg-[#c66690]/10 text-[#c66690] rounded-full text-sm">JavaScript</span>
                 </div>
                 <a
-                  href="#"
+                  href="https://step-style-eight.vercel.app/"
                   className="text-[#00dac4] hover:text-[#00dac4]/80 font-medium flex items-center gap-2"
                 >
                   View Project
@@ -395,12 +396,7 @@ const Home = () => {
       {/* Success Modal */}
       <SuccessModal isOpen={showModal} onClose={() => setShowModal(false)} />
 
-      {/* Footer */}
-      <footer className="bg-[#2a2943] text-white py-8">
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <p> 2024 Charles Manuel Diestro. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
