@@ -19,6 +19,7 @@ export default {
       },
       animation: {
         blob: "blob 7s infinite",
+        float: "float 6s ease-in-out infinite",
       },
       keyframes: {
         blob: {
@@ -35,8 +36,19 @@ export default {
             transform: "translate(0px, 0px) scale(1)",
           },
         },
+        float: {
+          "0%, 100%": {
+            transform: "translateY(0)",
+          },
+          "50%": {
+            transform: "translateY(-20px)",
+          },
+        },
+      },
+      backgroundImage: {
+        'grid': 'linear-gradient(var(--grid-color) 1px, transparent 1px), linear-gradient(90deg, var(--grid-color) 1px, transparent 1px)',
       },
     },
   },
   plugins: [],
-} 
+}

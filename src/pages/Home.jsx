@@ -1,18 +1,59 @@
 import { Link } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
-import { SiHtml5, SiCss3, SiPhp, SiLaravel, SiJavascript, SiBootstrap, SiGithub, SiMysql } from 'react-icons/si';
+import { SiHtml5, SiCss3, SiPhp, SiLaravel, SiJavascript, SiBootstrap, SiGithub, SiMysql, SiReact, SiSass } from 'react-icons/si';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const Home = () => {
   const skills = [
     { name: 'HTML', icon: <SiHtml5 className="text-4xl text-[#c66690]" />, progress: 85 },
     { name: 'CSS', icon: <SiCss3 className="text-4xl text-[#56b4ed]" />, progress: 80 },
+    { name: 'JavaScript', icon: <SiJavascript className="text-4xl text-[#00dac4]" />, progress: 65 },
+    { name: 'React', icon: <SiReact className="text-4xl text-[#61dafb]" />, progress: 75 },
     { name: 'PHP', icon: <SiPhp className="text-4xl text-[#c66690]" />, progress: 75 },
     { name: 'Laravel', icon: <SiLaravel className="text-4xl text-[#c66690]" />, progress: 70 },
-    { name: 'JavaScript', icon: <SiJavascript className="text-4xl text-[#00dac4]" />, progress: 65 },
+    { name: 'Sass', icon: <SiSass className="text-4xl text-[#cc6699]" />, progress: 70 },
     { name: 'Bootstrap', icon: <SiBootstrap className="text-4xl text-[#56b4ed]" />, progress: 80 },
     { name: 'GitHub', icon: <SiGithub className="text-4xl text-[#2a2943]" />, progress: 75 },
     { name: 'MySQL', icon: <SiMysql className="text-4xl text-[#56b4ed]" />, progress: 75 },
   ];
+
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 5000,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 0,
+    cssEase: 'linear',
+    pauseOnHover: true,
+    arrows: false,
+    variableWidth: false,
+    centerMode: false,
+    swipe: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+        }
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  };
 
   return (
     <div className="w-full">
@@ -84,47 +125,65 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-slate-100">
-        <div className="max-w-6xl mx-auto px-4">
+      <section id="about" className="py-20 bg-[#e6e6f8] relative overflow-hidden">
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#00dac4]/10 rounded-full filter blur-3xl animate-blob"></div>
+          <div className="absolute top-40 right-10 w-72 h-72 bg-[#c66690]/10 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+          <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-[#56b4ed]/10 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+          
+          {/* Grid pattern */}
+          <div className="absolute inset-0 bg-grid-[#2a2943]/[0.03] bg-[length:30px_30px]"></div>
+          
+          {/* Floating shapes */}
+          <div className="absolute top-1/4 left-1/4 w-8 h-8 border-2 border-[#00dac4]/20 rounded-lg animate-float"></div>
+          <div className="absolute top-1/3 right-1/4 w-6 h-6 border-2 border-[#c66690]/20 rounded-full animate-float animation-delay-1000"></div>
+          <div className="absolute bottom-1/4 left-1/3 w-10 h-10 border-2 border-[#56b4ed]/20 rotate-45 animate-float animation-delay-3000"></div>
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 relative">
           <h2 className="text-3xl font-bold text-center mb-12 text-[#2a2943]">About Me</h2>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-6">
-              <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100">
-                <img
-                  src="/images/self-portrait/self.jpg"
-                  alt="Charles Manuel Diestro"
-                  className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-[#00dac4]"
-                />
-                <h3 className="text-xl font-semibold mb-2 text-[#2a2943]">Charles Manuel Diestro</h3>
-                <p className="text-[#c66690] font-medium mb-4">Web Developer</p>
-                <p className="text-gray-600 mb-4">
-                  I am a fourth-year BSIT student at Filamer Christian University,
-                  passionate about creating elegant and functional web solutions.
-                </p>
-                <div className="text-gray-600">
-                  <p>📍 Cogon, Panay, Capiz, 5801, Philippines</p>
-                  <p>🎓 BSIT - Filamer Christian University</p>
-                </div>
+          
+          <div className="mb-12">
+            <div className="bg-white rounded-lg p-6 shadow-lg border border-gray-100 max-w-2xl mx-auto">
+              <img
+                src="/images/self-portrait/self.jpg"
+                alt="Charles Manuel Diestro"
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-[#00dac4]"
+              />
+              <h3 className="text-xl font-semibold mb-2 text-center text-[#2a2943]">Charles Manuel Diestro</h3>
+              <p className="text-[#c66690] font-medium mb-4 text-center">Web Developer</p>
+              <p className="text-gray-600 mb-4 text-center max-w-2xl mx-auto">
+                I am a fourth-year BSIT student at Filamer Christian University,
+                passionate about creating elegant and functional web solutions.
+              </p>
+              <div className="text-gray-600 text-center">
+                <p>📍 Cogon, Panay, Capiz, 5801, Philippines</p>
+                <p>🎓 BSIT - Filamer Christian University</p>
               </div>
             </div>
-            <div>
-              <h3 className="text-2xl font-semibold mb-6 text-[#2a2943]">Technical Skills</h3>
-              <div className="grid grid-cols-2 gap-4">
-                {skills.map((skill, index) => (
-                  <div key={index} className="bg-white p-4 rounded-lg shadow-lg border border-gray-100">
-                    <div className="flex items-center gap-4 mb-2">
+          </div>
+
+          {/* Skills Carousel */}
+          <div className="mb-12">
+            <h3 className="text-2xl font-semibold text-center mb-8 text-[#2a2943]">Technical Skills</h3>
+            <div className="skills-carousel">
+              <Slider {...sliderSettings}>
+                {[...skills, ...skills].map((skill, index) => (
+                  <div key={index} className="px-4">
+                    <div className="bg-white rounded-lg p-6 shadow-lg border border-b-4 border-b-[#00dac4] border-gray-100 h-40 flex flex-col items-center justify-center">
                       {skill.icon}
-                      <span className="font-medium text-[#2a2943]">{skill.name}</span>
-                    </div>
-                    <div className="w-full bg-gray-100 rounded-full h-2">
-                      <div
-                        className="bg-[#00dac4] h-2 rounded-full"
-                        style={{ width: `${skill.progress}%` }}
-                      />
+                      <h4 className="mt-4 font-medium text-[#2a2943]">{skill.name}</h4>
+                      <div className="w-full bg-gray-200 rounded-full h-2.5 mt-2">
+                        <div 
+                          className="bg-[#00dac4] h-2.5 rounded-full" 
+                          style={{ width: `${skill.progress}%` }}
+                        ></div>
+                      </div>
                     </div>
                   </div>
                 ))}
-              </div>
+              </Slider>
             </div>
           </div>
         </div>
@@ -269,11 +328,11 @@ const Home = () => {
       {/* Footer */}
       <footer className="bg-[#2a2943] text-white py-8">
         <div className="max-w-6xl mx-auto px-4 text-center">
-          <p>© 2024 Charles Manuel Diestro. All rights reserved.</p>
+          <p> 2024 Charles Manuel Diestro. All rights reserved.</p>
         </div>
       </footer>
     </div>
   );
 };
 
-export default Home; 
+export default Home;

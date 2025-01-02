@@ -25,3 +25,73 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-3000 {
+  animation-delay: 3s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.click-circle {
+  position: fixed;
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0, 218, 196, 0.4);
+  transform: translate(-50%, -50%);
+  animation: click-ripple 1s ease-out forwards;
+  z-index: 9999;
+}
+
+@keyframes click-ripple {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(4);
+  }
+}
+
+.cursor-trail {
+  pointer-events: none;
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: rgba(90, 61, 6, 0.993);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s;
+  z-index: 9998;
+  mix-blend-mode: plus-lighter;
+  backdrop-filter: blur(1px);
+  animation: trail-fade 0.5s linear forwards;
+}
+
+@keyframes trail-fade {
+  0% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+}
+
+/* Hide cursor trail when hovering over clickable elements */
+a:hover ~ .cursor-trail,
+button:hover ~ .cursor-trail {
+  opacity: 0 !important;
+}
