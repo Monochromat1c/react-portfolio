@@ -43,12 +43,17 @@ const ScrollToTop = () => {
   return null;
 };
 
-function App() {
+// PageTitle component to handle dynamic title updates
+const PageTitle = () => {
   usePageTitle();
-  
+  return null;
+};
+
+function App() {
   return (
     <Router>
       <div className="relative min-h-screen flex flex-col">
+        <PageTitle />
         <ClickAnimation />
         <CursorTrail />
         <ScrollToTop />
