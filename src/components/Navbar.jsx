@@ -95,7 +95,11 @@ const Navbar = () => {
             {/* Logo */}
             <div className="flex items-center">
               <Link to="/" className="text-2xl font-bold">
-                <span className="text-[#00dac4]">CD</span>
+                <img 
+                  src="/svgs/logo.svg" 
+                  alt="CD Logo" 
+                  className="h-[40px] w-auto hover:scale-105 transition-transform duration-300"
+                />
               </Link>
             </div>
 
