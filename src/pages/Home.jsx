@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaGithub } from 'react-icons/fa';
 import { SiHtml5, SiCss3, SiPhp, SiLaravel, SiJavascript, SiBootstrap, SiGithub, SiMysql, SiReact, SiSass } from 'react-icons/si';
@@ -6,8 +6,6 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FaMapMarkerAlt, FaGraduationCap, FaQuoteLeft } from 'react-icons/fa';
-import emailjs from '@emailjs/browser';
-import SuccessModal from '../components/SuccessModal';
 import Footer from '../components/Footer';
 
 const Home = () => {
@@ -60,12 +58,22 @@ const Home = () => {
     ]
   };
 
-  const form = useRef();
-  const [isLoading, setIsLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
-
   useEffect(() => {
-    emailjs.init("mHp4qqfnE2O6WAp5x");
+    // Set up intersection observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show-section');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Observe all sections with the animate-on-scroll class
+    document.querySelectorAll('.animate-on-scroll').forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -113,7 +121,7 @@ const Home = () => {
               GitHub
             </a>
             <a
-              href="#contact"
+              href="/contact"
               className="border-2 border-[#00dac4] text-[#00dac4] hover:bg-[#00dac4] hover:text-[#2a2943] font-medium px-8 py-4 rounded-md transition-colors shadow-lg"
             >
               Contact
@@ -138,7 +146,7 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-[#e6e6f8] relative overflow-hidden">
+      <section id="about" className="py-20 bg-[#e6e6f8] relative overflow-hidden animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#00dac4]/10 rounded-full filter blur-3xl animate-blob"></div>
@@ -218,7 +226,7 @@ const Home = () => {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-[#2a2943]">
+      <section id="projects" className="py-20 bg-[#2a2943] animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4 text-white">Projects</h2>
           <p className="text-center text-[#00dac4] mb-12">
@@ -263,140 +271,79 @@ const Home = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-slate-100">
+      <section id="contact" className="py-20 bg-slate-100 animate-on-scroll opacity-0 translate-y-10 transition-all duration-700">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 text-[#2a2943]">Contact Me</h2>
+          <h2 className="text-3xl font-bold text-center mb-4 text-[#2a2943]">Get In Touch</h2>
           <p className="text-center text-gray-600 mb-12">
-            Feel free to reach out to me for any inquiries or collaboration opportunities.
+            Let's connect and discuss how we can work together.
           </p>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-6">
-              <h3 className="text-xl font-semibold mb-6 text-[#2a2943]">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-[#00dac4]/10 rounded-full flex items-center justify-center text-[#00dac4]">
-                    <FaMapMarkerAlt className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-[#2a2943]">Location</p>
-                    <p className="text-gray-600">Cogon, Panay, Capiz, 5801, Philippines</p>
-                  </div>
+          <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-8 max-w-2xl mx-auto">
+            <div className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#00dac4]/10 rounded-full flex items-center justify-center text-[#00dac4]">
+                  <FaMapMarkerAlt className="w-5 h-5" />
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-[#56b4ed]/10 rounded-full flex items-center justify-center text-[#56b4ed]">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-medium text-[#2a2943]">Email</p>
-                    <p className="text-gray-600">charlesdiestro6@gmail.com</p>
-                  </div>
+                <div>
+                  <p className="font-medium text-[#2a2943]">Location</p>
+                  <p className="text-gray-600">Cogon, Panay, Capiz, 5801, Philippines</p>
                 </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 bg-[#c66690]/10 rounded-full flex items-center justify-center text-[#c66690]">
-                    <FaGithub className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="font-medium text-[#2a2943]">GitHub</p>
-                    <a 
-                      href="https://github.com/Monochromat1c"
-                      className="text-[#2f7971] hover:text-[#00dac4]/80"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      @Monochromat1c
-                    </a>
-                  </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#56b4ed]/10 rounded-full flex items-center justify-center text-[#56b4ed]">
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="font-medium text-[#2a2943]">Email</p>
+                  <a href="mailto:charlesdiestro6@gmail.com" className="text-[#2f7971] hover:text-[#00dac4]">
+                    charlesdiestro6@gmail.com
+                  </a>
+                </div>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#c66690]/10 rounded-full flex items-center justify-center text-[#c66690]">
+                  <FaGithub className="w-5 h-5" />
+                </div>
+                <div>
+                  <p className="font-medium text-[#2a2943]">GitHub</p>
+                  <a 
+                    href="https://github.com/Monochromat1c"
+                    className="text-[#2f7971] hover:text-[#00dac4]"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    @Monochromat1c
+                  </a>
                 </div>
               </div>
             </div>
-
-            <div className="bg-white rounded-lg shadow-lg border border-gray-100 p-6">
-              <h3 className="text-xl font-semibold mb-6 text-[#2a2943]">Send a Message</h3>
-              <form 
-                ref={form}
-                onSubmit={async (e) => {
-                  e.preventDefault();
-                  if (isLoading) return;
-                  
-                  setIsLoading(true);
-                  try {
-                    await emailjs.sendForm(
-                      'service_nwxn3gh',
-                      'template_dzclo3l',
-                      form.current,
-                      'mHp4qqfnE2O6WAp5x'
-                    );
-                    form.current.reset();
-                    setShowModal(true);
-                  } catch (error) {
-                    console.error('Error:', error);
-                    alert('Failed to send message. Please try again later.');
-                  } finally {
-                    setIsLoading(false);
-                  }
-                }}
-                className="space-y-4"
+            <div className="mt-8 text-center">
+              <Link
+                to="/contact"
+                className="inline-block bg-[#00dac4] hover:bg-[#00dac4]/90 text-white font-medium px-8 py-3 rounded-md transition-colors"
               >
-                <div>
-                  <label className="block text-[#2a2943] mb-2">Name</label>
-                  <input
-                    type="text"
-                    name="user_name"
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
-                    placeholder="Your name"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-[#2a2943] mb-2">Email</label>
-                  <input
-                    type="email"
-                    name="user_email"
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
-                    placeholder="Your email"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="block text-[#2a2943] mb-2">Message</label>
-                  <textarea
-                    name="message"
-                    className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 bg-slate-100 focus:ring-[#00dac4] text-gray-800"
-                    rows="4"
-                    placeholder="Your message"
-                    required
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className={`w-full bg-[#00dac4] hover:bg-[#00c4b0] text-white font-medium py-2 px-4 rounded-md transition-all relative ${
-                    isLoading ? 'opacity-70 cursor-not-allowed' : ''
-                  }`}
-                >
-                  {isLoading ? (
-                    <>
-                      <span className="opacity-0">Send Message</span>
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      </div>
-                    </>
-                  ) : (
-                    'Send Message'
-                  )}
-                </button>
-              </form>
+                Send Me a Message
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Success Modal */}
-      <SuccessModal isOpen={showModal} onClose={() => setShowModal(false)} />
-
       <Footer />
+
+      <style jsx>{`
+        .animate-on-scroll {
+          transform: translateY(50px);
+          opacity: 0;
+          transition: all 0.7s ease-out;
+        }
+
+        .show-section {
+          transform: translateY(0) !important;
+          opacity: 1 !important;
+        }
+      `}</style>
     </div>
   );
 };
