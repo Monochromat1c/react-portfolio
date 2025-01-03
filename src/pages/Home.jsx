@@ -330,7 +330,6 @@ const Home = () => {
         </div>
       </section>
 
-      <Footer />
 
       <style jsx>{`
         .animate-on-scroll {

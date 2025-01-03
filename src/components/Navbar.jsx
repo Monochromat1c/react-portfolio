@@ -10,7 +10,7 @@ const Navbar = () => {
 
   const links = [
     { id: 1, href: '#', text: 'Home', path: '/' },
-    { id: 2, href: '#about', text: 'About', path: '/#about' },
+    { id: 2, href: '/about', text: 'About', path: '/about' },
     { id: 3, href: '#projects', text: 'Projects', path: '/#projects' },
     { id: 4, href: '/contact', text: 'Contact', path: '/contact' },
   ];
