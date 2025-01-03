@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
@@ -9,6 +10,39 @@ import CursorTrail from './components/CursorTrail';
 import usePageTitle from './hooks/usePageTitle';
 import Footer from './components/Footer';
 
+// Scroll to top component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    const scrollToTop = () => {
+      // First try with smooth behavior
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+      });
+
+      // Force scroll after a small delay as backup
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+      }, 100);
+    };
+
+    // Execute scroll on route change
+    scrollToTop();
+
+    // Also handle browser back/forward buttons
+    window.addEventListener('popstate', scrollToTop);
+    
+    return () => {
+      window.removeEventListener('popstate', scrollToTop);
+    };
+  }, [pathname]);
+  
+  return null;
+};
+
 function App() {
   usePageTitle();
   
@@ -17,6 +51,7 @@ function App() {
       <div className="relative min-h-screen flex flex-col">
         <ClickAnimation />
         <CursorTrail />
+        <ScrollToTop />
         <Navbar />
         <main className="flex-grow">
           <Routes>
