@@ -24,7 +24,7 @@ const About = () => {
   return (
       <div className="w-full">
           {/* Hero Section */}
-          <section className="relative pt-[5vh] pb-[2.5vh] bg-[#2a2943] overflow-hidden">
+          <section className="relative pt-[80px] bg-[#2a2943] overflow-hidden">
               {/* Background image with overlay */}
               <div className="absolute inset-0 z-0">
                   <img

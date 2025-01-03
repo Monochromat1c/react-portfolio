@@ -98,8 +98,8 @@ const Home = () => {
               </div>
 
               {/* Content */}
-              <div className="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-[#2a2943]/10">
-                  <h1 className="text-4xl sm:text-7xl font-bold text-white mb-6 drop-shadow-lg">
+              <div className="relative z-10 mt-5 flex flex-col items-center justify-center min-h-screen text-center px-4 bg-[#2a2943]/10">
+                  <h1 className="text-4xl sm:text-7xl font-bold text-white mb-1 drop-shadow-lg">
                       Charles Manuel Diestro
                   </h1>
                   <p className="text-2xl text-[#00dac4] font-medium mb-8 drop-shadow-lg">
