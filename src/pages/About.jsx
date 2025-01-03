@@ -170,7 +170,7 @@ const About = () => {
                 <div className="relative pl-8 border-l-2 border-[#00dac4]">
                   <div className="absolute left-[-9px] top-0 w-4 h-4 bg-[#00dac4] rounded-full"></div>
                   <h3 className="text-xl font-semibold text-[#2a2943]">BS Information Technology</h3>
-                  <p className="text-[#00dac4]">2020 - Present</p>
+                  <p className="text-[#00dac4]">2021 - Present</p>
                   <p className="text-gray-600">Filamer Christian University</p>
                   <p className="text-gray-500 mt-2">Focusing on web development and software engineering principles.</p>
                 </div>

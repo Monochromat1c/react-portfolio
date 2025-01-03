@@ -11,7 +11,7 @@ const Navbar = () => {
   const links = [
     { id: 1, href: '#', text: 'Home', path: '/' },
     { id: 2, href: '/about', text: 'About', path: '/about' },
-    { id: 3, href: '#projects', text: 'Projects', path: '/#projects' },
+    { id: 3, href: '/projects', text: 'Projects', path: '/projects' },
     { id: 4, href: '/contact', text: 'Contact', path: '/contact' },
   ];
 
@@ -23,7 +23,7 @@ const Navbar = () => {
     }
 
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'contact'];
+      const sections = ['home', 'about', 'contact'];
       let currentSection = 'home';
       let maxVisibility = 0;
 
@@ -78,7 +78,7 @@ const Navbar = () => {
       return location.pathname === '/';
     }
     if (link.href === '#') {
-      return isHomePage && (activeSection === '' || window.scrollY < 100);
+      return isHomePage;
     }
     if (link.href.startsWith('#')) {
       return isHomePage && activeSection === link.href.slice(1);
@@ -231,7 +231,7 @@ const Navbar = () => {
                 </a>
               </div>
               <p className="text-center text-sm text-gray-400">
-                © 2024 Charles Manuel Diestro
+                2024 Charles Manuel Diestro
               </p>
             </div>
           </div>
@@ -241,4 +241,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
