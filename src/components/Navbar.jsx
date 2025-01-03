@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { FaGithub } from 'react-icons/fa';
 
 const Navbar = () => {
   const [nav, setNav] = useState(false);
@@ -26,6 +27,12 @@ const Navbar = () => {
       let currentSection = 'home';
       let maxVisibility = 0;
 
+      // Check if we're at the top of the page
+      if (window.scrollY < 100) {
+        setActiveSection('');
+        return;
+      }
+
       sections.forEach(sectionId => {
         const element = document.querySelector(`#${sectionId}`);
         if (element) {
@@ -51,9 +58,13 @@ const Navbar = () => {
     if (link.href.startsWith('#')) {
       e.preventDefault();
       if (isHomePage) {
-        const element = document.querySelector(link.href);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
+        if (link.href === '#') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const element = document.querySelector(link.href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
         }
       } else {
         window.location.href = link.path;
@@ -63,8 +74,11 @@ const Navbar = () => {
   };
 
   const isActive = (link) => {
+    if (!isHomePage && link.href === '#') {
+      return location.pathname === '/';
+    }
     if (link.href === '#') {
-      return isHomePage && activeSection === '';
+      return isHomePage && (activeSection === '' || window.scrollY < 100);
     }
     if (link.href.startsWith('#')) {
       return isHomePage && activeSection === link.href.slice(1);
@@ -123,7 +137,11 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <div className="md:hidden">
               <button
-                onClick={() => setNav(!nav)}
+                onClick={() => {
+                  setNav(!nav);
+                  // Toggle body scroll
+                  document.body.style.overflow = !nav ? 'hidden' : 'auto';
+                }}
                 className="text-gray-200 hover:text-[#00dac4] transition-colors"
               >
                 <svg
@@ -157,41 +175,66 @@ const Navbar = () => {
         <div
           className={`${
             nav ? 'translate-x-0' : '-translate-x-full'
-          } md:hidden fixed top-20 left-0 w-full h-screen bg-[#2a2943]/95 backdrop-blur-sm transform transition-transform duration-300 ease-in-out`}
+          } md:hidden fixed top-20 left-0 w-full h-[calc(100vh-5rem)] bg-[#2a2943] backdrop-blur-sm transform transition-transform duration-300 ease-in-out flex flex-col overflow-hidden`}
         >
-          <ul className="flex flex-col items-center space-y-8 pt-8">
-            {links.map((link) => (
-              <li key={link.id}>
-                {link.href.startsWith('#') ? (
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleClick(e, link)}
-                    className={`text-gray-200 hover:text-[#00dac4] transition-colors text-lg relative ${
-                      isActive(link) ? 'text-[#00dac4]' : ''
-                    }`}
-                  >
-                    {link.text}
-                    {isActive(link) && (
-                      <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00dac4] rounded-full"></span>
-                    )}
-                  </a>
-                ) : (
-                  <Link
-                    to={link.href}
-                    className={`text-gray-200 hover:text-[#00dac4] transition-colors text-lg relative ${
-                      isActive(link) ? 'text-[#00dac4]' : ''
-                    }`}
-                    onClick={() => setNav(false)}
-                  >
-                    {link.text}
-                    {isActive(link) && (
-                      <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00dac4] rounded-full"></span>
-                    )}
-                  </Link>
-                )}
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col h-full">
+            <ul className="flex-1 flex flex-col items-center justify-center space-y-8">
+              {links.map((link) => (
+                <li key={link.id}>
+                  {link.href.startsWith('#') ? (
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        handleClick(e, link);
+                        document.body.style.overflow = 'auto';
+                      }}
+                      className={`text-gray-200 hover:text-[#00dac4] transition-colors text-lg relative ${
+                        isActive(link) ? 'text-[#00dac4]' : ''
+                      }`}
+                    >
+                      {link.text}
+                      {isActive(link) && (
+                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00dac4] rounded-full"></span>
+                      )}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link.href}
+                      className={`text-gray-200 hover:text-[#00dac4] transition-colors text-lg relative ${
+                        isActive(link) ? 'text-[#00dac4]' : ''
+                      }`}
+                      onClick={() => {
+                        setNav(false);
+                        document.body.style.overflow = 'auto';
+                      }}
+                    >
+                      {link.text}
+                      {isActive(link) && (
+                        <span className="absolute -bottom-1 left-0 w-full h-0.5 bg-[#00dac4] rounded-full"></span>
+                      )}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile Menu Footer */}
+            <div className="p-8 mt-auto">
+              <div className="flex justify-center space-x-6 mb-4">
+                <a
+                  href="https://github.com/Monochromat1c"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#00dac4] hover:text-[#00dac4]/80 transition-colors"
+                >
+                  <FaGithub size={24} />
+                </a>
+              </div>
+              <p className="text-center text-sm text-gray-400">
+                © 2024 Charles Manuel Diestro
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

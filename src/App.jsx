@@ -5,20 +5,24 @@ import Contact from './pages/Contact';
 import ClickAnimation from './components/ClickAnimation';
 import CursorTrail from './components/CursorTrail';
 import usePageTitle from './hooks/usePageTitle';
+import Footer from './components/Footer';
 
 function App() {
   usePageTitle();
   
   return (
     <Router>
-      <div className="relative">
+      <div className="relative min-h-screen flex flex-col">
         <ClickAnimation />
         <CursorTrail />
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <main className="flex-grow">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <Footer />
       </div>
     </Router>
   );
